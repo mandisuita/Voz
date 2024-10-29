@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Reconhecimento de Voz</title>
+</head>
+<body>
+  <h2>Pressione o botão e fale</h2>
+  <button onclick="iniciarReconhecimento()">Iniciar Reconhecimento</button>
+  <p id="textoCapturado"></p>
+
+  <script>
+    function iniciarReconhecimento() {
+      const reconhecimento = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      reconhecimento.lang = 'pt-BR';
+      reconhecimento.onresult = (evento) => {
+        const texto = evento.results[0][0].transcript;
+        document.getElementById('textoCapturado').innerText = texto;
+      };
+      reconhecimento.start();
+    }
+  </script>
+</body>
+</html>
